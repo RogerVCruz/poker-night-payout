@@ -1,0 +1,38 @@
+{
+  "app": {
+    "title": "Calculadora de Poker",
+    "subtitle": "Acompanhe seus ganhos e perdas com estilo"
+  },
+  "gameSettings": {
+    "title": "Configurações do Jogo",
+    "buyIn": "Valor do Buy-in (por entrada)"
+  },
+  "players": {
+    "title": "Jogadores",
+    "addPlayer": "Adicionar Jogador",
+    "removePlayer": "Remover Jogador",
+    "playerName": "Nome do Jogador",
+    "entries": "Entradas",
+    "finalChips": "Fichas Finais",
+    "investment": "Investimento",
+    "result": "Resultado",
+    "profit": "Lucro",
+    "loss": "Perda"
+  },
+  "gameSummary": {
+    "title": "Resumo do Jogo",
+    "totalPlayers": "Total de Jogadores",
+    "totalPot": "Pote Total",
+    "totalChips": "Total de Fichas",
+    "winners": "Ganhadores",
+    "losers": "Perdedores",
+    "breakEven": "Empatados",
+    "playerResults": "Resultados dos Jogadores"
+  },
+  "export": {
+    "title": "Exportar Resultados",
+    "print": "Imprimir Resultados",
+    "exportHtml": "Exportar como HTML"
+  },
+  "currency": "R$"
+}

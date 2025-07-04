@@ -1,0 +1,38 @@
+{
+  "app": {
+    "title": "Calculadora de Póker",
+    "subtitle": "Rastrea tus ganancias y pérdidas con estilo"
+  },
+  "gameSettings": {
+    "title": "Configuración del Juego",
+    "buyIn": "Valor de Buy-in (por entrada)"
+  },
+  "players": {
+    "title": "Jugadores",
+    "addPlayer": "Añadir Jugador",
+    "removePlayer": "Eliminar Jugador",
+    "playerName": "Nombre del Jugador",
+    "entries": "Entradas",
+    "finalChips": "Fichas Finales",
+    "investment": "Inversión",
+    "result": "Resultado",
+    "profit": "Ganancia",
+    "loss": "Pérdida"
+  },
+  "gameSummary": {
+    "title": "Resumen del Juego",
+    "totalPlayers": "Total de Jugadores",
+    "totalPot": "Bote Total",
+    "totalChips": "Total de Fichas",
+    "winners": "Ganadores",
+    "losers": "Perdedores",
+    "breakEven": "Sin Cambios",
+    "playerResults": "Resultados de Jugadores"
+  },
+  "export": {
+    "title": "Exportar Resultados",
+    "print": "Imprimir Resultados",
+    "exportHtml": "Exportar como HTML"
+  },
+  "currency": "€"
+}

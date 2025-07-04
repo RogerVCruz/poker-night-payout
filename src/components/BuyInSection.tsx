@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { DollarSign } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface BuyInSectionProps {
   buyIn: number;
@@ -8,16 +9,17 @@ interface BuyInSectionProps {
 }
 
 const BuyInSection: React.FC<BuyInSectionProps> = ({ buyIn, setBuyIn }) => {
+  const { t } = useTranslation();
   return (
     <div className="bg-amber-50 border-2 border-amber-200 rounded-lg p-6 mb-6 shadow-lg">
       <div className="flex items-center gap-3 mb-4">
         <DollarSign className="text-green-700" size={24} />
-        <h2 className="text-2xl font-bold text-green-800">Game Settings</h2>
+        <h2 className="text-2xl font-bold text-green-800">{t('gameSettings.title')}</h2>
       </div>
       
       <div className="max-w-md">
         <label className="block text-sm font-medium text-green-700 mb-2">
-          Buy-in Value (per entry)
+          {t('gameSettings.buyIn')}
         </label>
         <input
           type="number"

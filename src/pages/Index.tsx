@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Plus, Users, Calculator } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import PlayerInput, { Player } from '../components/PlayerInput';
 import BuyInSection from '../components/BuyInSection';
 import GameSummary from '../components/GameSummary';
 import HtmlExporter from '../components/HtmlExporter';
+import LanguageSwitcher from '../components/LanguageSwitcher';
 
 const Index = () => {
+  const { t } = useTranslation();
   const [buyIn, setBuyIn] = useState<number>(100);
   const [players, setPlayers] = useState<Player[]>([
     { id: 1, name: 'Player 1', entries: 1, finalChips: 0 },
@@ -68,11 +71,14 @@ const Index = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
+          <div className="flex justify-end mb-4">
+            <LanguageSwitcher />
+          </div>
           <h1 className="text-4xl md:text-5xl font-bold text-amber-100 mb-2 flex items-center justify-center gap-3">
             <Calculator className="text-amber-200" size={48} />
-            Poker Night Calculator
+            {t('app.title')}
           </h1>
-          <p className="text-amber-200 text-lg">Track your wins and losses with style</p>
+          <p className="text-amber-200 text-lg">{t('app.subtitle')}</p>
         </div>
 
         {/* Buy-in Section */}
@@ -83,7 +89,7 @@ const Index = () => {
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
               <Users className="text-green-700" size={24} />
-              <h2 className="text-2xl font-bold text-green-800">Players</h2>
+              <h2 className="text-2xl font-bold text-green-800">{t('players.title')}</h2>
             </div>
             
             <button
@@ -91,7 +97,7 @@ const Index = () => {
               className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg flex items-center gap-2 transition-colors shadow-md"
             >
               <Plus size={20} />
-              Add Player
+              {t('players.addPlayer')}
             </button>
           </div>
           

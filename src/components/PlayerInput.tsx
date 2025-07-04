@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Minus } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 interface Player {
   id: number;
@@ -24,12 +25,13 @@ const PlayerInput: React.FC<PlayerInputProps> = ({
   removePlayer, 
   playersLength 
 }) => {
+  const { t } = useTranslation();
   const calculateResult = (player: Player): number => {
     return  player.entries * buyIn;
   };
 
   const formatCurrency = (amount: number): string => {
-    return `R$ ${amount.toFixed(2)}`;
+    return `${t('currency')} ${amount.toFixed(2)}`;
   };
 
   const result = calculateResult(player);
@@ -44,7 +46,7 @@ const PlayerInput: React.FC<PlayerInputProps> = ({
           value={player.name}
           onChange={(e) => updatePlayer(player.id, 'name', e.target.value)}
           className="text-lg font-semibold bg-transparent border-b-2 border-amber-300 focus:border-amber-500 outline-none text-green-800"
-          placeholder="Player Name"
+          placeholder={t('players.playerName')}
         />
         <button
           onClick={() => removePlayer(player.id)}
@@ -58,7 +60,7 @@ const PlayerInput: React.FC<PlayerInputProps> = ({
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
         <div>
           <label className="block text-sm font-medium text-green-700 mb-1">
-            Entries
+            {t('players.entries')}
           </label>
           <input
             type="number"
@@ -72,7 +74,7 @@ const PlayerInput: React.FC<PlayerInputProps> = ({
         
         <div>
           <label className="block text-sm font-medium text-green-700 mb-1">
-            Final Chips
+            {t('players.finalChips')}
           </label>
           <input
             type="number"
@@ -88,7 +90,7 @@ const PlayerInput: React.FC<PlayerInputProps> = ({
       
       <div className="border-t-2 border-amber-200 pt-3">
         <div className="flex justify-between items-center">
-          <span className="text-sm font-medium text-green-700">Result:</span>
+          <span className="text-sm font-medium text-green-700">{t('players.result')}:</span>
           <span
             className={`text-lg font-bold ${
               isProfit ? 'text-green-600' : isLoss ? 'text-red-600' : 'text-gray-600'

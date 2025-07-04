@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Download } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Player } from './PlayerInput';
 
 interface HtmlExporterProps {
@@ -9,8 +10,9 @@ interface HtmlExporterProps {
 }
 
 const HtmlExporter: React.FC<HtmlExporterProps> = ({ players, buyIn }) => {
+  const { t } = useTranslation();
   const formatCurrency = (amount: number): string => {
-    return `R$ ${amount.toFixed(2)}`;
+    return `${t('currency')} ${amount.toFixed(2)}`;
   };
 
   const calculateResult = (player: Player): number => {
@@ -240,7 +242,7 @@ const HtmlExporter: React.FC<HtmlExporterProps> = ({ players, buyIn }) => {
       className="bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3 px-6 rounded-lg flex items-center gap-2 transition-colors shadow-md"
     >
       <Download size={20} />
-      Export HTML Report
+      {t('export.exportHtml')}
     </button>
   );
 };
