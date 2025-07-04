@@ -33,7 +33,6 @@ const Index = () => {
     }
   }, []);
 
-  // Save to localStorage whenever state changes
   useEffect(() => {
     const dataToSave = {
       buyIn,
@@ -78,7 +77,6 @@ const Index = () => {
             <Calculator className="text-amber-200" size={48} />
             {t('app.title')}
           </h1>
-          <p className="text-amber-200 text-lg">{t('app.subtitle')}</p>
         </div>
 
         {/* Buy-in Section */}
