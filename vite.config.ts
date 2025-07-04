@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => ({
     host: "::",
     port: 8080,
   },
-  base: "/poker-night-payout",
+  base: "/poker-night-payout/",
   plugins: [
     react(),
     mode === 'development' &&
