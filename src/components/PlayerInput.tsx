@@ -71,32 +71,32 @@ const PlayerInput: React.FC<PlayerInputProps> = ({
   return (
     <div className="bg-amber-50 border-2 border-amber-200 rounded-lg p-4 shadow-md">
       <div className="mb-3">
-        <label className="block text-sm font-medium text-green-700 mb-1">
-          {t('players.playerName')}
-        </label>
-        <div className="flex justify-between items-center">
-          <div className="relative flex-grow">
-            <div className="flex items-center border border-amber-300 rounded-md focus-within:ring-2 focus-within:ring-green-500 focus-within:border-transparent hover:border-amber-400 transition-colors group">
-              <input
-                type="text"
-                value={player.name}
-                onChange={(e) => updatePlayer(player.id, 'name', e.target.value)}
-                onFocus={(e) => e.target.select()}
-                className="flex-grow px-3 py-2 text-lg font-semibold bg-transparent outline-none text-green-800 rounded-md"
-                placeholder={t('players.playerName')}
-                aria-label={t('players.editPlayerName')}
-              />
-              <Edit2 size={16} className="mr-3 text-amber-500 opacity-50 group-hover:opacity-100 transition-opacity" />
-            </div>
-          </div>
+        <div className="flex justify-between items-center mb-1">
+          <label className="block text-sm font-medium text-green-700">
+            {t('players.playerName')}
+          </label>
           <button
             onClick={() => removePlayer(player.id)}
-            className="text-red-600 hover:text-red-800 p-1 rounded hover:bg-red-100 transition-colors ml-2"
+            className="text-red-600 hover:text-red-800 p-1 rounded hover:bg-red-100 transition-colors"
             disabled={playersLength <= 1}
             aria-label={t('players.removePlayer')}
           >
-            <Minus size={20} />
+            <Minus size={18} />
           </button>
+        </div>
+        <div className="w-full">
+          <div className="flex items-center border border-amber-300 rounded-md focus-within:ring-2 focus-within:ring-green-500 focus-within:border-transparent hover:border-amber-400 transition-colors group">
+            <input
+              type="text"
+              value={player.name}
+              onChange={(e) => updatePlayer(player.id, 'name', e.target.value)}
+              onFocus={(e) => e.target.select()}
+              className="flex-grow px-3 py-2 text-lg font-semibold bg-transparent outline-none text-green-800 rounded-md"
+              placeholder={t('players.playerName')}
+              aria-label={t('players.editPlayerName')}
+            />
+            <Edit2 size={16} className="mr-3 text-amber-500 opacity-50 group-hover:opacity-100 transition-opacity" />
+          </div>
         </div>
       </div>
       
