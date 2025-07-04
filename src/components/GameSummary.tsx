@@ -4,17 +4,63 @@ import { Calculator } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Player } from './PlayerInput';
 
+/**
+ * Props for the GameSummary component
+ */
 interface GameSummaryProps {
   players: Player[];
   buyIn: number;
 }
 
+/**
+ * Converts a potentially string value to a number
+ * @param value - The value to convert
+ * @param defaultValue - Default value if empty string (defaults to 0)
+ * @returns The numeric value
+ */
+const toNumber = (value: number | string, defaultValue = 0): number => {
+  if (typeof value === 'string') {
+    return value === '' ? defaultValue : parseFloat(value);
+  }
+  return value;
+};
+
+/**
+ * GameSummary component for displaying game statistics
+ */
 const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn }) => {
   const { t } = useTranslation();
+  
+  /**
+   * Formats a number as currency
+   */
   const formatCurrency = (amount: number): string => {
     return `${t('currency')} ${amount.toFixed(2)}`;
   };
 
+  /**
+   * Calculates the total pot (sum of all buy-ins)
+   */
+  const getTotalPot = (): number => {
+    return players.reduce((sum, player) => {
+      const entries = toNumber(player.entries);
+      return sum + (entries * buyIn);
+    }, 0);
+  };
+
+  /**
+   * Calculates the total chips in play
+   */
+  const getTotalChips = (): number => {
+    return players.reduce((sum, player) => {
+      const finalChips = toNumber(player.finalChips);
+      return sum + finalChips;
+    }, 0);
+  };
+  
+  /**
+   * Calculates a player's result based on chip value
+   */
   const calculateResult = (player: Player): number => {
     const totalPot = getTotalPot();
     const totalChips = getTotalChips();
@@ -22,18 +68,13 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn }) => {
     if (totalChips === 0) return 0;
     
     const realChipValue = totalPot / totalChips;
-    const playerCashValue = player.finalChips * realChipValue;
-    const playerInvestment = player.entries * buyIn;
+    const finalChips = toNumber(player.finalChips);
+    const entries = toNumber(player.entries);
+    
+    const playerCashValue = finalChips * realChipValue;
+    const playerInvestment = entries * buyIn;
     
     return playerCashValue - playerInvestment;
-  };
-
-  const getTotalPot = (): number => {
-    return players.reduce((sum, player) => sum + (player.entries * buyIn), 0);
-  };
-
-  const getTotalChips = (): number => {
-    return players.reduce((sum, player) => sum + player.finalChips, 0);
   };
 
   return (

@@ -4,27 +4,68 @@ import { Download } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Player } from './PlayerInput';
 
+/**
+ * Props for the HtmlExporter component
+ */
 interface HtmlExporterProps {
   players: Player[];
   buyIn: number;
 }
 
+/**
+ * Converts a potentially string value to a number
+ * @param value - The value to convert
+ * @param defaultValue - Default value if empty string (defaults to 0)
+ * @returns The numeric value
+ */
+const toNumber = (value: number | string, defaultValue = 0): number => {
+  if (typeof value === 'string') {
+    return value === '' ? defaultValue : parseFloat(value);
+  }
+  return value;
+};
+
+/**
+ * HtmlExporter component for exporting game results as HTML
+ */
 const HtmlExporter: React.FC<HtmlExporterProps> = ({ players, buyIn }) => {
   const { t } = useTranslation();
+  
+  /**
+   * Formats a number as currency
+   */
   const formatCurrency = (amount: number): string => {
     return `${t('currency')} ${amount.toFixed(2)}`;
   };
 
-  const calculateResult = (player: Player): number => {
-    return player.finalChips - (player.entries * buyIn);
-  };
-
+  /**
+   * Calculates the total pot (sum of all buy-ins)
+   */
   const getTotalPot = (): number => {
-    return players.reduce((sum, player) => sum + (player.entries * buyIn), 0);
+    return players.reduce((sum, player) => {
+      const entries = toNumber(player.entries);
+      return sum + (entries * buyIn);
+    }, 0);
   };
 
+  /**
+   * Calculates the total chips in play
+   */
   const getTotalChips = (): number => {
-    return players.reduce((sum, player) => sum + player.finalChips, 0);
+    return players.reduce((sum, player) => {
+      const finalChips = toNumber(player.finalChips);
+      return sum + finalChips;
+    }, 0);
+  };
+  
+  /**
+   * Calculates a player's result
+   */
+  const calculateResult = (player: Player): number => {
+    const finalChips = toNumber(player.finalChips);
+    const entries = toNumber(player.entries);
+    
+    return finalChips - (entries * buyIn);
   };
 
   const generateHtml = (): string => {
@@ -198,8 +239,8 @@ const HtmlExporter: React.FC<HtmlExporterProps> = ({ players, buyIn }) => {
                     <div>
                         <div class="player-name">${player.name}</div>
                         <div class="player-details">
-                            ${player.entries} ${player.entries === 1 ? 'entry' : 'entries'} • 
-                            Final chips: ${formatCurrency(player.finalChips)}
+                            ${typeof player.entries === 'string' ? (player.entries === '' ? 0 : parseFloat(player.entries)) : player.entries} ${(typeof player.entries === 'string' ? (player.entries === '' ? 0 : parseFloat(player.entries)) : player.entries) === 1 ? 'entry' : 'entries'} • 
+                            Final chips: ${formatCurrency(typeof player.finalChips === 'string' ? (player.finalChips === '' ? 0 : parseFloat(player.finalChips)) : player.finalChips)}
                         </div>
                     </div>
                     <div class="player-amount ${resultClass}">

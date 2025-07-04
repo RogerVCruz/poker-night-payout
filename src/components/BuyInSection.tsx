@@ -3,11 +3,30 @@ import React from 'react';
 import { DollarSign } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
+/**
+ * Props for the BuyInSection component
+ */
 interface BuyInSectionProps {
   buyIn: number;
   setBuyIn: (value: number) => void;
 }
 
+/**
+ * Converts a potentially string value to a number
+ * @param value - The value to convert
+ * @param defaultValue - Default value if empty string (defaults to 0)
+ * @returns The numeric value
+ */
+const toNumber = (value: number | string, defaultValue = 0): number => {
+  if (typeof value === 'string') {
+    return value === '' ? defaultValue : parseFloat(value);
+  }
+  return value;
+};
+
+/**
+ * BuyInSection component for managing buy-in amount
+ */
 const BuyInSection: React.FC<BuyInSectionProps> = ({ buyIn, setBuyIn }) => {
   const { t } = useTranslation();
   return (
@@ -23,10 +42,14 @@ const BuyInSection: React.FC<BuyInSectionProps> = ({ buyIn, setBuyIn }) => {
         </label>
         <input
           type="number"
-          min="0.01"
+          min="0"
           step="0.01"
           value={buyIn}
-          onChange={(e) => setBuyIn(parseFloat(e.target.value) || 0.01)}
+          onChange={(e) => {
+            const value = e.target.value === '' ? '' : parseFloat(e.target.value);
+            setBuyIn(toNumber(value));
+          }}
+          onFocus={(e) => e.target.select()}
           className="w-full px-4 py-3 text-lg border-2 border-amber-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
           required
         />

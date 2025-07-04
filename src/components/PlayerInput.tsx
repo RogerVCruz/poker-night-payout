@@ -3,13 +3,19 @@ import React from 'react';
 import { Minus } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
+/**
+ * Player data structure
+ */
 interface Player {
   id: number;
   name: string;
-  entries: number;
-  finalChips: number;
+  entries: number | string;
+  finalChips: number | string;
 }
 
+/**
+ * Props for the PlayerInput component
+ */
 interface PlayerInputProps {
   player: Player;
   buyIn: number;
@@ -18,6 +24,22 @@ interface PlayerInputProps {
   playersLength: number;
 }
 
+/**
+ * Converts a potentially string value to a number
+ * @param value - The value to convert
+ * @param defaultValue - Default value if empty string (defaults to 0)
+ * @returns The numeric value
+ */
+const toNumber = (value: number | string, defaultValue = 0): number => {
+  if (typeof value === 'string') {
+    return value === '' ? defaultValue : parseFloat(value);
+  }
+  return value;
+};
+
+/**
+ * PlayerInput component for managing individual player data
+ */
 const PlayerInput: React.FC<PlayerInputProps> = ({ 
   player, 
   buyIn, 
@@ -26,10 +48,18 @@ const PlayerInput: React.FC<PlayerInputProps> = ({
   playersLength 
 }) => {
   const { t } = useTranslation();
+  
+  /**
+   * Calculates the player's result based on entries and buy-in
+   */
   const calculateResult = (player: Player): number => {
-    return  player.entries * buyIn;
+    const entries = toNumber(player.entries);
+    return entries * buyIn;
   };
 
+  /**
+   * Formats a number as currency
+   */
   const formatCurrency = (amount: number): string => {
     return `${t('currency')} ${amount.toFixed(2)}`;
   };
@@ -45,6 +75,7 @@ const PlayerInput: React.FC<PlayerInputProps> = ({
           type="text"
           value={player.name}
           onChange={(e) => updatePlayer(player.id, 'name', e.target.value)}
+          onFocus={(e) => e.target.select()}
           className="text-lg font-semibold bg-transparent border-b-2 border-amber-300 focus:border-amber-500 outline-none text-green-800"
           placeholder={t('players.playerName')}
         />
@@ -64,9 +95,13 @@ const PlayerInput: React.FC<PlayerInputProps> = ({
           </label>
           <input
             type="number"
-            min="1"
+            min="0"
             value={player.entries}
-            onChange={(e) => updatePlayer(player.id, 'entries', parseInt(e.target.value) || 1)}
+            onChange={(e) => {
+              const value = e.target.value === '' ? '' : parseInt(e.target.value);
+              updatePlayer(player.id, 'entries', value);
+            }}
+            onFocus={(e) => e.target.select()}
             className="w-full px-3 py-2 border border-amber-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
             required
           />
@@ -81,7 +116,11 @@ const PlayerInput: React.FC<PlayerInputProps> = ({
             min="0"
             step="0.01"
             value={player.finalChips}
-            onChange={(e) => updatePlayer(player.id, 'finalChips', parseFloat(e.target.value) || 0)}
+            onChange={(e) => {
+              const value = e.target.value === '' ? '' : parseFloat(e.target.value);
+              updatePlayer(player.id, 'finalChips', value);
+            }}
+            onFocus={(e) => e.target.select()}
             className="w-full px-3 py-2 border border-amber-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
             required
           />
