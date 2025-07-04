@@ -97,26 +97,26 @@ const Index = () => {
 
         {/* Players Section */}
         <div className="bg-amber-50 border-2 border-amber-200 rounded-lg p-6 mb-6 shadow-lg">
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
             <div className="flex items-center gap-3">
               <Users className="text-green-700" size={24} />
               <h2 className="text-2xl font-bold text-green-800">{t('players.title')}</h2>
             </div>
             
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2 w-full sm:w-auto">
               <button
                 onClick={clearAllData}
-                className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg flex items-center gap-2 transition-colors shadow-md"
+                className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-3 sm:px-4 rounded-lg flex items-center gap-1 sm:gap-2 transition-colors shadow-md text-sm sm:text-base flex-1 sm:flex-initial justify-center"
               >
-                <Trash2 size={20} />
-                {t('actions.clearAll')}
+                <Trash2 size={18} />
+                <span className="whitespace-nowrap">{t('actions.clearAll')}</span>
               </button>
               <button
                 onClick={addPlayer}
-                className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg flex items-center gap-2 transition-colors shadow-md"
+                className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-3 sm:px-4 rounded-lg flex items-center gap-1 sm:gap-2 transition-colors shadow-md text-sm sm:text-base flex-1 sm:flex-initial justify-center"
               >
-                <Plus size={20} />
-                {t('players.addPlayer')}
+                <Plus size={18} />
+                <span className="whitespace-nowrap">{t('players.addPlayer')}</span>
               </button>
             </div>
           </div>
