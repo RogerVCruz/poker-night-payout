@@ -34,5 +34,9 @@
     "print": "Print Results",
     "exportHtml": "Export as HTML"
   },
+  "actions": {
+    "clearAll": "Clear All",
+    "clearConfirm": "Are you sure you want to clear all data? This action cannot be undone."
+  },
   "currency": "$"
 }

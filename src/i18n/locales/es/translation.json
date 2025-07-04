@@ -34,5 +34,9 @@
     "print": "Imprimir Resultados",
     "exportHtml": "Exportar como HTML"
   },
+  "actions": {
+    "clearAll": "Limpiar Todo",
+    "clearConfirm": "¿Estás seguro de que quieres borrar todos los datos? Esta acción no se puede deshacer."
+  },
   "currency": "€"
 }

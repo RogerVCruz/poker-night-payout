@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Plus, Users, Calculator } from 'lucide-react';
+import { Plus, Users, Calculator, Trash2 } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import PlayerInput, { Player } from '../components/PlayerInput';
 import BuyInSection from '../components/BuyInSection';
@@ -59,6 +59,19 @@ const Index = () => {
     }
   };
 
+  const clearAllData = () => {
+    if (window.confirm(t('actions.clearConfirm'))) {
+      setPlayers([
+        { id: 1, name: 'Player 1', entries: 1, finalChips: 0 },
+        { id: 2, name: 'Player 2', entries: 1, finalChips: 0 },
+        { id: 3, name: 'Player 3', entries: 1, finalChips: 0 },
+        { id: 4, name: 'Player 4', entries: 1, finalChips: 0 },
+      ]);
+      setBuyIn(100);
+      setNextId(5);
+    }
+  };
+
   const updatePlayer = (id: number, field: keyof Player, value: string | number) => {
     setPlayers(players.map(player =>
       player.id === id ? { ...player, [field]: value } : player
@@ -90,13 +103,22 @@ const Index = () => {
               <h2 className="text-2xl font-bold text-green-800">{t('players.title')}</h2>
             </div>
             
-            <button
-              onClick={addPlayer}
-              className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg flex items-center gap-2 transition-colors shadow-md"
-            >
-              <Plus size={20} />
-              {t('players.addPlayer')}
-            </button>
+            <div className="flex gap-2">
+              <button
+                onClick={clearAllData}
+                className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded-lg flex items-center gap-2 transition-colors shadow-md"
+              >
+                <Trash2 size={20} />
+                {t('actions.clearAll')}
+              </button>
+              <button
+                onClick={addPlayer}
+                className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg flex items-center gap-2 transition-colors shadow-md"
+              >
+                <Plus size={20} />
+                {t('players.addPlayer')}
+              </button>
+            </div>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
