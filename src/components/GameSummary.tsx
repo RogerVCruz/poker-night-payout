@@ -78,31 +78,31 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn }) => {
   };
 
   return (
-    <div className="bg-amber-50 border-2 border-amber-200 rounded-lg p-6 shadow-lg print:break-inside-avoid">
-      <h2 className="text-2xl font-bold text-green-800 mb-4 flex items-center gap-3">
-        <Calculator className="text-green-700" size={24} />
+    <div className="bg-white border-2 border-[#f9bf71] rounded-lg p-6 shadow-lg print:break-inside-avoid">
+      <h2 className="text-2xl font-bold text-[#4f4340] mb-4 flex items-center gap-3">
+        <Calculator className="text-[#a2503d]" size={24} />
         {t('gameSummary.title')}
       </h2>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-green-100 p-4 rounded-lg text-center">
-          <div className="text-2xl font-bold text-green-800">{players.length}</div>
-          <div className="text-sm text-green-600">{t('gameSummary.totalPlayers')}</div>
+        <div className="bg-[#f9bf71]/20 p-4 rounded-lg text-center">
+          <div className="text-2xl font-bold text-[#4f4340]">{players.length}</div>
+          <div className="text-sm text-[#a2503d]">{t('gameSummary.totalPlayers')}</div>
         </div>
         
-        <div className="bg-blue-100 p-4 rounded-lg text-center">
-          <div className="text-2xl font-bold text-blue-800">{formatCurrency(getTotalPot())}</div>
-          <div className="text-sm text-blue-600">{t('gameSummary.totalPot')}</div>
+        <div className="bg-[#ff873f]/20 p-4 rounded-lg text-center">
+          <div className="text-2xl font-bold text-[#4f4340]">{formatCurrency(getTotalPot())}</div>
+          <div className="text-sm text-[#a2503d]">{t('gameSummary.totalPot')}</div>
         </div>
         
-        <div className="bg-purple-100 p-4 rounded-lg text-center">
-          <div className="text-2xl font-bold text-purple-800">{getTotalChips()}</div>
-          <div className="text-sm text-purple-600">{t('gameSummary.totalChips')}</div>
+        <div className="bg-[#793c47]/20 p-4 rounded-lg text-center">
+          <div className="text-2xl font-bold text-[#4f4340]">{getTotalChips()}</div>
+          <div className="text-sm text-[#a2503d]">{t('gameSummary.totalChips')}</div>
         </div>
       </div>
 
-      <div className="mt-6 border-t-2 border-amber-200 pt-4">
-        <h3 className="text-lg font-semibold text-green-800 mb-3">{t('gameSummary.playerResults')}</h3>
+      <div className="mt-6 border-t-2 border-[#f9bf71] pt-4">
+        <h3 className="text-lg font-semibold text-[#4f4340] mb-3">{t('gameSummary.playerResults')}</h3>
         <div className="space-y-2">
           {players.map((player) => {
             const result = calculateResult(player);
@@ -110,11 +110,11 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn }) => {
             const isLoss = result < 0;
             
             return (
-              <div key={player.id} className="flex justify-between items-center py-2 px-3 bg-white rounded border-l-4 border-l-amber-400">
-                <span className="font-medium text-green-800">{player.name}</span>
+              <div key={player.id} className="flex justify-between items-center py-2 px-3 bg-white rounded border-l-4 border-l-[#ff873f]">
+                <span className="font-medium text-[#4f4340]">{player.name}</span>
                 <span
                   className={`font-bold ${
-                    isProfit ? 'text-green-600' : isLoss ? 'text-red-600' : 'text-gray-600'
+                    isProfit ? 'text-[#ff873f]' : isLoss ? 'text-[#793c47]' : 'text-[#4f4340]'
                   }`}
                 >
                   {formatCurrency(result)}

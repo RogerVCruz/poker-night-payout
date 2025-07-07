@@ -30,14 +30,14 @@ const toNumber = (value: number | string, defaultValue = 0): number => {
 const BuyInSection: React.FC<BuyInSectionProps> = ({ buyIn, setBuyIn }) => {
   const { t } = useTranslation();
   return (
-    <div className="bg-amber-50 border-2 border-amber-200 rounded-lg p-6 mb-6 shadow-lg">
+    <div className="bg-white border-2 border-[#f9bf71] rounded-lg p-6 mb-6 shadow-lg">
       <div className="flex items-center gap-3 mb-4">
-        <DollarSign className="text-green-700" size={24} />
-        <h2 className="text-2xl font-bold text-green-800">{t('gameSettings.title')}</h2>
+        <DollarSign className="text-[#a2503d]" size={24} />
+        <h2 className="text-2xl font-bold text-[#4f4340]">{t('gameSettings.title')}</h2>
       </div>
       
       <div className="max-w-md">
-        <label className="block text-sm font-medium text-green-700 mb-2">
+        <label className="block text-sm font-medium text-[#a2503d] mb-2">
           {t('gameSettings.buyIn')}
         </label>
         <input
@@ -50,7 +50,7 @@ const BuyInSection: React.FC<BuyInSectionProps> = ({ buyIn, setBuyIn }) => {
             setBuyIn(toNumber(value));
           }}
           onFocus={(e) => e.target.select()}
-          className="w-full px-4 py-3 text-lg border-2 border-amber-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
+          className="w-full px-4 py-3 text-lg border-2 border-[#f9bf71] rounded-md focus:ring-2 focus:ring-[#ff873f] focus:border-transparent"
           required
         />
       </div>
