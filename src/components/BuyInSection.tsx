@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { DollarSign } from 'lucide-react';
+import { DollarSign, Coins } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 /**
@@ -37,22 +37,44 @@ const BuyInSection: React.FC<BuyInSectionProps> = ({ buyIn, setBuyIn }) => {
       </div>
       
       <div className="max-w-md">
-        <label className="block text-sm font-medium text-[#a2503d] mb-2">
+        <label className="block text-sm font-medium text-[#a2503d] mb-2 flex items-center gap-2">
+          <Coins className="text-[#ff873f]" size={18} />
           {t('gameSettings.buyIn')}
         </label>
-        <input
-          type="number"
-          min="0"
-          step="0.01"
-          value={buyIn}
-          onChange={(e) => {
-            const value = e.target.value === '' ? '' : parseFloat(e.target.value);
-            setBuyIn(toNumber(value));
-          }}
-          onFocus={(e) => e.target.select()}
-          className="w-full px-4 py-3 text-lg border-2 border-[#f9bf71] rounded-md focus:ring-2 focus:ring-[#ff873f] focus:border-transparent"
-          required
-        />
+        <div className="relative">
+          <div className="absolute left-4 top-1/2 transform -translate-y-1/2 flex items-center">
+            <DollarSign className="text-[#a2503d] opacity-70" size={18} />
+          </div>
+          <input
+            type="number"
+            min="0"
+            step="0.01"
+            value={buyIn}
+            onChange={(e) => {
+              const value = e.target.value === '' ? '' : parseFloat(e.target.value);
+              setBuyIn(toNumber(value));
+            }}
+            onFocus={(e) => e.target.select()}
+            className="w-full px-4 py-3 pl-10 text-lg border-2 border-[#f9bf71] rounded-md focus:ring-2 focus:ring-[#ff873f] focus:border-transparent"
+            required
+          />
+        </div>
+        <div className="mt-3 flex justify-between">
+          <button 
+            onClick={() => setBuyIn(Math.max(0, buyIn - 5))} 
+            className="px-3 py-1 bg-[#f9bf71]/20 hover:bg-[#f9bf71]/40 rounded-md text-[#a2503d] transition-colors flex items-center gap-1"
+          >
+            <span>-5</span>
+            <Coins size={14} />
+          </button>
+          <button 
+            onClick={() => setBuyIn(buyIn + 5)} 
+            className="px-3 py-1 bg-[#f9bf71]/20 hover:bg-[#f9bf71]/40 rounded-md text-[#a2503d] transition-colors flex items-center gap-1"
+          >
+            <span>+5</span>
+            <Coins size={14} />
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Minus, Edit2 } from 'lucide-react';
+import { Minus, Edit2, Coins, DollarSign } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
 /**
@@ -120,33 +120,41 @@ const PlayerInput: React.FC<PlayerInputProps> = ({
         </div>
         
         <div>
-          <label className="block text-sm font-medium text-[#a2503d] mb-1">
+          <label className="block text-sm font-medium text-[#a2503d] mb-1 flex items-center gap-1">
+            <Coins size={16} className="text-[#ff873f]" />
             {t('players.finalChips')}
           </label>
-          <input
-            type="number"
-            min="0"
-            step="0.01"
-            value={player.finalChips}
-            onChange={(e) => {
-              const value = e.target.value === '' ? '' : parseFloat(e.target.value);
-              updatePlayer(player.id, 'finalChips', value);
-            }}
-            onFocus={(e) => e.target.select()}
-            className="w-full px-3 py-2 border border-[#f9bf71] rounded-md focus:ring-2 focus:ring-[#ff873f] focus:border-transparent"
-            required
-          />
+          <div className="relative">
+            <input
+              type="number"
+              min="0"
+              step="0.01"
+              value={player.finalChips}
+              onChange={(e) => {
+                const value = e.target.value === '' ? '' : parseFloat(e.target.value);
+                updatePlayer(player.id, 'finalChips', value);
+              }}
+              onFocus={(e) => e.target.select()}
+              className="w-full px-3 py-2 pl-9 border border-[#f9bf71] rounded-md focus:ring-2 focus:ring-[#ff873f] focus:border-transparent"
+              required
+            />
+            <Coins size={16} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#a2503d] opacity-70" />
+          </div>
         </div>
       </div>
       
       <div className="border-t-2 border-[#f9bf71] pt-3">
         <div className="flex justify-between items-center">
-          <span className="text-sm font-medium text-[#a2503d]">{t('players.result')}:</span>
+          <span className="text-sm font-medium text-[#a2503d] flex items-center gap-1">
+            <DollarSign size={16} className="text-[#ff873f]" />
+            {t('players.result')}:
+          </span>
           <span
-            className={`text-lg font-bold ${
+            className={`text-lg font-bold flex items-center gap-1 ${
               isProfit ? 'text-[#ff873f]' : isLoss ? 'text-[#793c47]' : 'text-[#4f4340]'
             }`}
           >
+            {isProfit && <DollarSign size={16} />}
             {formatCurrency(result)}
           </span>
         </div>

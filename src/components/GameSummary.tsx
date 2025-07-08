@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Calculator } from 'lucide-react';
+import { Calculator, Users, DollarSign, Coins } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Player } from './PlayerInput';
 
@@ -86,16 +86,25 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn }) => {
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="bg-[#f9bf71]/20 p-4 rounded-lg text-center">
+          <div className="flex justify-center mb-1">
+            <Users className="text-[#a2503d]" size={28} />
+          </div>
           <div className="text-2xl font-bold text-[#4f4340]">{players.length}</div>
           <div className="text-sm text-[#a2503d]">{t('gameSummary.totalPlayers')}</div>
         </div>
         
         <div className="bg-[#ff873f]/20 p-4 rounded-lg text-center">
+          <div className="flex justify-center mb-1">
+            <DollarSign className="text-[#a2503d]" size={28} />
+          </div>
           <div className="text-2xl font-bold text-[#4f4340]">{formatCurrency(getTotalPot())}</div>
           <div className="text-sm text-[#a2503d]">{t('gameSummary.totalPot')}</div>
         </div>
         
         <div className="bg-[#793c47]/20 p-4 rounded-lg text-center">
+          <div className="flex justify-center mb-1">
+            <Coins className="text-[#a2503d]" size={28} />
+          </div>
           <div className="text-2xl font-bold text-[#4f4340]">{getTotalChips()}</div>
           <div className="text-sm text-[#a2503d]">{t('gameSummary.totalChips')}</div>
         </div>
@@ -113,10 +122,11 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn }) => {
               <div key={player.id} className="flex justify-between items-center py-2 px-3 bg-white rounded border-l-4 border-l-[#ff873f]">
                 <span className="font-medium text-[#4f4340]">{player.name}</span>
                 <span
-                  className={`font-bold ${
+                  className={`font-bold flex items-center gap-1 ${
                     isProfit ? 'text-[#ff873f]' : isLoss ? 'text-[#793c47]' : 'text-[#4f4340]'
                   }`}
                 >
+                  {isProfit && <DollarSign size={16} />}
                   {formatCurrency(result)}
                 </span>
               </div>
