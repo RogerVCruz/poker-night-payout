@@ -8,52 +8,52 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Nova paleta de cores: #ff873f #a2503d #4f4340 #793c47 #f9bf71 */
-    --background: 24 100% 62%; /* #ff873f */
-    --foreground: 0 0% 10%;
+    /* Paleta de cores 'Noite de Pôquer' */
+    --background: 146 27% 27%; /* #1A472A - Verde feltro escuro e profundo */
+    --foreground: 0 0% 96%; /* #F5F5DC - Bege/Creme (off-white) */
 
-    --card: 0 0% 100%;
-    --card-foreground: 4 14% 28%; /* #4f4340 */
+    --card: 0 0% 10%; /* #1a1a1a - Quase preto, para containers e modais */
+    --card-foreground: 0 0% 96%; /* #F5F5DC - Bege/Creme (off-white) */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 4 14% 28%; /* #4f4340 */
+    --popover: 0 0% 10%; /* #1a1a1a - Quase preto */
+    --popover-foreground: 0 0% 96%; /* #F5F5DC - Bege/Creme (off-white) */
 
-    --primary: 24 100% 62%; /* #ff873f */
-    --primary-foreground: 0 0% 100%;
+    --primary: 0 68% 42%; /* #B22222 - Vermelho 'Firebrick' */
+    --primary-foreground: 0 0% 96%; /* #F5F5DC - Bege/Creme (off-white) */
 
-    --secondary: 10 45% 44%; /* #a2503d */
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 0 0% 31%; /* #4F4F4F - Cinza escuro */
+    --secondary-foreground: 0 0% 96%; /* #F5F5DC - Bege/Creme (off-white) */
 
-    --muted: 4 14% 28%; /* #4f4340 */
-    --muted-foreground: 0 0% 90%;
+    --muted: 0 0% 31%; /* #4F4F4F - Cinza escuro */
+    --muted-foreground: 0 0% 63%; /* #a0a0a0 - Cinza claro */
 
-    --accent: 347 35% 36%; /* #793c47 */
-    --accent-foreground: 0 0% 100%;
+    --accent: 25 30% 23%; /* #4B382A - Tom de madeira escura */
+    --accent-foreground: 0 0% 96%; /* #F5F5DC - Bege/Creme (off-white) */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 68% 63%; /* #D46A6A - Vermelho mais claro */
+    --destructive-foreground: 0 0% 96%; /* #F5F5DC - Bege/Creme (off-white) */
 
-    --border: 35 91% 71%; /* #f9bf71 */
-    --input: 35 91% 71%; /* #f9bf71 */
-    --ring: 24 100% 62%; /* #ff873f */
+    --border: 25 30% 23%; /* #4B382A - Tom de madeira escura */
+    --input: 25 30% 23%; /* #4B382A - Tom de madeira escura */
+    --ring: 51 100% 50%; /* #FFD700 - Dourado */
 
     --radius: 0.5rem;
 
-    --sidebar-background: 4 14% 28%; /* #4f4340 */
+    --sidebar-background: 0 0% 10%; /* #1a1a1a - Quase preto */
 
-    --sidebar-foreground: 35 91% 71%; /* #f9bf71 */
+    --sidebar-foreground: 0 0% 96%; /* #F5F5DC - Bege/Creme (off-white) */
 
-    --sidebar-primary: 24 100% 62%; /* #ff873f */
+    --sidebar-primary: 0 68% 42%; /* #B22222 - Vermelho 'Firebrick' */
 
-    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-primary-foreground: 0 0% 96%; /* #F5F5DC - Bege/Creme (off-white) */
 
-    --sidebar-accent: 10 45% 44%; /* #a2503d */
+    --sidebar-accent: 25 30% 23%; /* #4B382A - Tom de madeira escura */
 
-    --sidebar-accent-foreground: 35 91% 71%; /* #f9bf71 */
+    --sidebar-accent-foreground: 51 100% 50%; /* #FFD700 - Dourado */
 
-    --sidebar-border: 347 35% 36%; /* #793c47 */
+    --sidebar-border: 25 30% 23%; /* #4B382A - Tom de madeira escura */
 
-    --sidebar-ring: 24 100% 62%; /* #ff873f */
+    --sidebar-ring: 51 100% 50%; /* #FFD700 - Dourado */
   }
 
   .dark {

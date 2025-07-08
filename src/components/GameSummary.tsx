@@ -78,40 +78,40 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn }) => {
   };
 
   return (
-    <div className="bg-white border-2 border-[#f9bf71] rounded-lg p-6 shadow-lg print:break-inside-avoid">
-      <h2 className="text-2xl font-bold text-[#4f4340] mb-4 flex items-center gap-3">
-        <Calculator className="text-[#a2503d]" size={24} />
+    <div className="bg-[#1a1a1a] border-2 border-[#4B382A] rounded-lg p-6 shadow-lg print:break-inside-avoid">
+      <h2 className="text-2xl font-bold text-[#F5F5DC] mb-4 flex items-center gap-3">
+        <Calculator className="text-[#B22222]" size={24} />
         {t('gameSummary.title')}
       </h2>
       
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-[#f9bf71]/20 p-4 rounded-lg text-center">
+        <div className="bg-[#1A472A]/40 p-4 rounded-lg text-center">
           <div className="flex justify-center mb-1">
-            <Users className="text-[#a2503d]" size={28} />
+            <Users className="text-[#FFD700]" size={28} />
           </div>
-          <div className="text-2xl font-bold text-[#4f4340]">{players.length}</div>
-          <div className="text-sm text-[#a2503d]">{t('gameSummary.totalPlayers')}</div>
+          <div className="text-2xl font-bold text-[#F5F5DC]">{players.length}</div>
+          <div className="text-sm text-[#a0a0a0]">{t('gameSummary.totalPlayers')}</div>
         </div>
         
-        <div className="bg-[#ff873f]/20 p-4 rounded-lg text-center">
+        <div className="bg-[#B22222]/20 p-4 rounded-lg text-center">
           <div className="flex justify-center mb-1">
-            <DollarSign className="text-[#a2503d]" size={28} />
+            <DollarSign className="text-[#FFD700]" size={28} />
           </div>
-          <div className="text-2xl font-bold text-[#4f4340]">{formatCurrency(getTotalPot())}</div>
-          <div className="text-sm text-[#a2503d]">{t('gameSummary.totalPot')}</div>
+          <div className="text-2xl font-bold text-[#F5F5DC]">{formatCurrency(getTotalPot())}</div>
+          <div className="text-sm text-[#a0a0a0]">{t('gameSummary.totalPot')}</div>
         </div>
         
-        <div className="bg-[#793c47]/20 p-4 rounded-lg text-center">
+        <div className="bg-[#4F4F4F]/30 p-4 rounded-lg text-center">
           <div className="flex justify-center mb-1">
-            <Coins className="text-[#a2503d]" size={28} />
+            <Coins className="text-[#FFD700]" size={28} />
           </div>
-          <div className="text-2xl font-bold text-[#4f4340]">{getTotalChips()}</div>
-          <div className="text-sm text-[#a2503d]">{t('gameSummary.totalChips')}</div>
+          <div className="text-2xl font-bold text-[#F5F5DC]">{getTotalChips()}</div>
+          <div className="text-sm text-[#a0a0a0]">{t('gameSummary.totalChips')}</div>
         </div>
       </div>
 
-      <div className="mt-6 border-t-2 border-[#f9bf71] pt-4">
-        <h3 className="text-lg font-semibold text-[#4f4340] mb-3">{t('gameSummary.playerResults')}</h3>
+      <div className="mt-6 border-t-2 border-[#4B382A] pt-4">
+        <h3 className="text-lg font-semibold text-[#F5F5DC] mb-3">{t('gameSummary.playerResults')}</h3>
         <div className="space-y-2">
           {players.map((player) => {
             const result = calculateResult(player);
@@ -119,11 +119,11 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn }) => {
             const isLoss = result < 0;
             
             return (
-              <div key={player.id} className="flex justify-between items-center py-2 px-3 bg-white rounded border-l-4 border-l-[#ff873f]">
-                <span className="font-medium text-[#4f4340]">{player.name}</span>
+              <div key={player.id} className="flex justify-between items-center py-2 px-3 bg-[#1A472A]/30 rounded border-l-4 border-l-[#B22222]">
+                <span className="font-medium text-[#F5F5DC]">{player.name}</span>
                 <span
                   className={`font-bold flex items-center gap-1 ${
-                    isProfit ? 'text-[#ff873f]' : isLoss ? 'text-[#793c47]' : 'text-[#4f4340]'
+                    isProfit ? 'text-[#FFD700]' : isLoss ? 'text-[#D46A6A]' : 'text-[#F5F5DC]'
                   }`}
                 >
                   {isProfit && <DollarSign size={16} />}

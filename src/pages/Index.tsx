@@ -79,15 +79,15 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#ff873f] via-[#a2503d] to-[#4f4340] p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#1A472A] via-[#1a1a1a] to-[#4B382A] p-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
           <div className="flex justify-end mb-4">
             <LanguageSwitcher />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-2 flex items-center justify-center gap-3">
-            <Calculator className="text-[#f9bf71]" size={48} />
+          <h1 className="text-4xl md:text-5xl font-bold text-[#F5F5DC] mb-2 flex items-center justify-center gap-3">
+            <Calculator className="text-[#FFD700]" size={48} />
             {t('app.title')}
           </h1>
         </div>
@@ -96,24 +96,24 @@ const Index = () => {
         <BuyInSection buyIn={buyIn} setBuyIn={setBuyIn} />
 
         {/* Players Section */}
-        <div className="bg-white border-2 border-[#f9bf71] rounded-lg p-6 mb-6 shadow-lg">
+        <div className="bg-[#1a1a1a] border-2 border-[#4B382A] rounded-lg p-6 mb-6 shadow-lg">
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
             <div className="flex items-center gap-3">
-              <Users className="text-[#a2503d]" size={24} />
-              <h2 className="text-2xl font-bold text-[#4f4340]">{t('players.title')}</h2>
+              <Users className="text-[#B22222]" size={24} />
+              <h2 className="text-2xl font-bold text-[#F5F5DC]">{t('players.title')}</h2>
             </div>
             
             <div className="flex flex-wrap gap-2 w-full sm:w-auto">
               <button
                 onClick={clearAllData}
-                className="bg-[#793c47] hover:bg-[#4f4340] text-white font-semibold py-2 px-3 sm:px-4 rounded-lg flex items-center gap-1 sm:gap-2 transition-colors shadow-md text-sm sm:text-base flex-1 sm:flex-initial justify-center"
+                className="bg-[#4F4F4F] hover:bg-[#4B382A] text-[#F5F5DC] font-semibold py-2 px-3 sm:px-4 rounded-lg flex items-center gap-1 sm:gap-2 transition-colors shadow-md text-sm sm:text-base flex-1 sm:flex-initial justify-center"
               >
                 <Trash2 size={18} />
                 <span className="whitespace-nowrap">{t('actions.clearAll')}</span>
               </button>
               <button
                 onClick={addPlayer}
-                className="bg-[#ff873f] hover:bg-[#a2503d] text-white font-semibold py-2 px-3 sm:px-4 rounded-lg flex items-center gap-1 sm:gap-2 transition-colors shadow-md text-sm sm:text-base flex-1 sm:flex-initial justify-center"
+                className="bg-[#B22222] hover:bg-[#D46A6A] text-[#F5F5DC] font-semibold py-2 px-3 sm:px-4 rounded-lg flex items-center gap-1 sm:gap-2 transition-colors shadow-md text-sm sm:text-base flex-1 sm:flex-initial justify-center"
               >
                 <Plus size={18} />
                 <span className="whitespace-nowrap">{t('players.addPlayer')}</span>

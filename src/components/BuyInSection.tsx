@@ -30,20 +30,20 @@ const toNumber = (value: number | string, defaultValue = 0): number => {
 const BuyInSection: React.FC<BuyInSectionProps> = ({ buyIn, setBuyIn }) => {
   const { t } = useTranslation();
   return (
-    <div className="bg-white border-2 border-[#f9bf71] rounded-lg p-6 mb-6 shadow-lg">
+    <div className="bg-[#1a1a1a] border-2 border-[#4B382A] rounded-lg p-6 mb-6 shadow-lg">
       <div className="flex items-center gap-3 mb-4">
-        <DollarSign className="text-[#a2503d]" size={24} />
-        <h2 className="text-2xl font-bold text-[#4f4340]">{t('gameSettings.title')}</h2>
+        <DollarSign className="text-[#B22222]" size={24} />
+        <h2 className="text-2xl font-bold text-[#F5F5DC]">{t('gameSettings.title')}</h2>
       </div>
       
       <div className="max-w-md">
-        <label className="block text-sm font-medium text-[#a2503d] mb-2 flex items-center gap-2">
-          <Coins className="text-[#ff873f]" size={18} />
+        <label className="block text-sm font-medium text-[#F5F5DC] mb-2 flex items-center gap-2">
+          <Coins className="text-[#FFD700]" size={18} />
           {t('gameSettings.buyIn')}
         </label>
         <div className="relative">
           <div className="absolute left-4 top-1/2 transform -translate-y-1/2 flex items-center">
-            <DollarSign className="text-[#a2503d] opacity-70" size={18} />
+            <DollarSign className="text-[#FFD700] opacity-70" size={18} />
           </div>
           <input
             type="number"
@@ -55,24 +55,24 @@ const BuyInSection: React.FC<BuyInSectionProps> = ({ buyIn, setBuyIn }) => {
               setBuyIn(toNumber(value));
             }}
             onFocus={(e) => e.target.select()}
-            className="w-full px-4 py-3 pl-10 text-lg border-2 border-[#f9bf71] rounded-md focus:ring-2 focus:ring-[#ff873f] focus:border-transparent"
+            className="w-full px-4 py-3 pl-10 text-lg border-2 border-[#4B382A] rounded-md focus:ring-2 focus:ring-[#FFD700] focus:border-transparent bg-[#1A472A]/30 text-[#F5F5DC]"
             required
           />
         </div>
         <div className="mt-3 flex justify-between">
           <button 
             onClick={() => setBuyIn(Math.max(0, buyIn - 5))} 
-            className="px-3 py-1 bg-[#f9bf71]/20 hover:bg-[#f9bf71]/40 rounded-md text-[#a2503d] transition-colors flex items-center gap-1"
+            className="px-3 py-1 bg-[#4F4F4F]/30 hover:bg-[#4F4F4F]/50 rounded-md text-[#F5F5DC] transition-colors flex items-center gap-1"
           >
             <span>-5</span>
-            <Coins size={14} />
+            <Coins size={14} className="text-[#FFD700]" />
           </button>
           <button 
             onClick={() => setBuyIn(buyIn + 5)} 
-            className="px-3 py-1 bg-[#f9bf71]/20 hover:bg-[#f9bf71]/40 rounded-md text-[#a2503d] transition-colors flex items-center gap-1"
+            className="px-3 py-1 bg-[#B22222]/20 hover:bg-[#B22222]/40 rounded-md text-[#F5F5DC] transition-colors flex items-center gap-1"
           >
             <span>+5</span>
-            <Coins size={14} />
+            <Coins size={14} className="text-[#FFD700]" />
           </button>
         </div>
       </div>

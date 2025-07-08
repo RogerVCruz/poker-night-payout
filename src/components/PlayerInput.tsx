@@ -69,15 +69,15 @@ const PlayerInput: React.FC<PlayerInputProps> = ({
   const isLoss = result < 0;
 
   return (
-    <div className="bg-white border-2 border-[#f9bf71] rounded-lg p-4 shadow-md">
+    <div className="bg-[#1a1a1a] border-2 border-[#4B382A] rounded-lg p-4 shadow-md">
       <div className="mb-3">
         <div className="flex justify-between items-center mb-1">
-          <label className="block text-sm font-medium text-[#a2503d]">
+          <label className="block text-sm font-medium text-[#F5F5DC]">
             {t('players.playerName')}
           </label>
           <button
             onClick={() => removePlayer(player.id)}
-            className="text-[#793c47] hover:text-[#4f4340] p-1 rounded hover:bg-[#f9bf71]/20 transition-colors"
+            className="text-[#D46A6A] hover:text-[#F5F5DC] p-1 rounded hover:bg-[#4F4F4F]/30 transition-colors"
             disabled={playersLength <= 1}
             aria-label={t('players.removePlayer')}
           >
@@ -85,24 +85,24 @@ const PlayerInput: React.FC<PlayerInputProps> = ({
           </button>
         </div>
         <div className="w-full">
-          <div className="flex items-center border border-[#f9bf71] rounded-md focus-within:ring-2 focus-within:ring-[#ff873f] focus-within:border-transparent hover:border-[#f9bf71] transition-colors group">
+          <div className="flex items-center border border-[#4B382A] rounded-md focus-within:ring-2 focus-within:ring-[#FFD700] focus-within:border-transparent hover:border-[#B22222] transition-colors group">
             <input
               type="text"
               value={player.name}
               onChange={(e) => updatePlayer(player.id, 'name', e.target.value)}
               onFocus={(e) => e.target.select()}
-              className="flex-grow px-3 py-2 text-lg font-semibold bg-transparent outline-none text-[#4f4340] rounded-md"
+              className="flex-grow px-3 py-2 text-lg font-semibold bg-transparent outline-none text-[#F5F5DC] rounded-md"
               placeholder={t('players.playerName')}
               aria-label={t('players.editPlayerName')}
             />
-            <Edit2 size={16} className="mr-3 text-[#ff873f] opacity-50 group-hover:opacity-100 transition-opacity" />
+            <Edit2 size={16} className="mr-3 text-[#B22222] opacity-50 group-hover:opacity-100 transition-opacity" />
           </div>
         </div>
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
         <div>
-          <label className="block text-sm font-medium text-[#a2503d] mb-1">
+          <label className="block text-sm font-medium text-[#F5F5DC] mb-1">
             {t('players.entries')}
           </label>
           <input
@@ -114,14 +114,14 @@ const PlayerInput: React.FC<PlayerInputProps> = ({
               updatePlayer(player.id, 'entries', value);
             }}
             onFocus={(e) => e.target.select()}
-            className="w-full px-3 py-2 border border-[#f9bf71] rounded-md focus:ring-2 focus:ring-[#ff873f] focus:border-transparent"
+            className="w-full px-3 py-2 border border-[#4B382A] rounded-md focus:ring-2 focus:ring-[#FFD700] focus:border-transparent bg-[#1A472A]/30 text-[#F5F5DC]"
             required
           />
         </div>
         
         <div>
-          <label className="block text-sm font-medium text-[#a2503d] mb-1 flex items-center gap-1">
-            <Coins size={16} className="text-[#ff873f]" />
+          <label className="block text-sm font-medium text-[#F5F5DC] mb-1 flex items-center gap-1">
+            <Coins size={16} className="text-[#FFD700]" />
             {t('players.finalChips')}
           </label>
           <div className="relative">
@@ -135,23 +135,23 @@ const PlayerInput: React.FC<PlayerInputProps> = ({
                 updatePlayer(player.id, 'finalChips', value);
               }}
               onFocus={(e) => e.target.select()}
-              className="w-full px-3 py-2 pl-9 border border-[#f9bf71] rounded-md focus:ring-2 focus:ring-[#ff873f] focus:border-transparent"
+              className="w-full px-3 py-2 pl-9 border border-[#4B382A] rounded-md focus:ring-2 focus:ring-[#FFD700] focus:border-transparent bg-[#1A472A]/30 text-[#F5F5DC]"
               required
             />
-            <Coins size={16} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#a2503d] opacity-70" />
+            <Coins size={16} className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[#FFD700] opacity-70" />
           </div>
         </div>
       </div>
       
-      <div className="border-t-2 border-[#f9bf71] pt-3">
+      <div className="border-t-2 border-[#4B382A] pt-3">
         <div className="flex justify-between items-center">
-          <span className="text-sm font-medium text-[#a2503d] flex items-center gap-1">
-            <DollarSign size={16} className="text-[#ff873f]" />
+          <span className="text-sm font-medium text-[#F5F5DC] flex items-center gap-1">
+            <DollarSign size={16} className="text-[#FFD700]" />
             {t('players.result')}:
           </span>
           <span
             className={`text-lg font-bold flex items-center gap-1 ${
-              isProfit ? 'text-[#ff873f]' : isLoss ? 'text-[#793c47]' : 'text-[#4f4340]'
+              isProfit ? 'text-[#FFD700]' : isLoss ? 'text-[#D46A6A]' : 'text-[#F5F5DC]'
             }`}
           >
             {isProfit && <DollarSign size={16} />}
