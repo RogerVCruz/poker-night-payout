@@ -140,7 +140,7 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn, chipsPerBuyIn
         }`}>
           <div className="flex justify-center mb-1 gap-1">
             {!hasChipsDiscrepancy() && <Coins className={"text-[#FFD700]"} size={28} />}
-            {hasChipsDiscrepancy() && <AlertTriangle className="text-[#D46A6A]" size={38} />}
+            {hasChipsDiscrepancy() && <AlertTriangle className="text-[#D46A6A]" size={28} />}
           </div>
           <div className={`text-2xl font-bold ${hasChipsDiscrepancy() ? "text-[#D46A6A]" : "text-[#F5F5DC]"}`}>
             {getTotalChips()}
@@ -158,10 +158,10 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn, chipsPerBuyIn
         <div className={`p-4 rounded-lg text-center ${
           hasChipsDiscrepancy() 
             ? 'bg-[#4F4F4F]/50 border-2 border-[#4F4F4F]/70' 
-            : 'bg-[#B22222]/10'
+            : 'bg-[#1A472A]/60 border-2 border-[#1A472A]/80'
         }`}>
           <div className="flex justify-center mb-1">
-            <Coins className={hasChipsDiscrepancy() ? "text-[#a0a0a0]" : "text-[#B22222]"} size={28} />
+            <Coins className={hasChipsDiscrepancy() ? "text-[#a0a0a0]" : "text-[#FFD700]"} size={28} />
           </div>
           <div className={`text-2xl font-bold ${hasChipsDiscrepancy() ? "text-[#a0a0a0]" : "text-[#F5F5DC]"}`}>
             {getExpectedChips()}
