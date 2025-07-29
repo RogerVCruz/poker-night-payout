@@ -5,7 +5,8 @@
   },
   "gameSettings": {
     "title": "Configuración del Juego",
-    "buyIn": "Valor de Buy-in (por entrada)"
+    "buyIn": "Valor de Buy-in (por entrada)",
+    "chipsPerBuyIn": "Fichas por Buy-in"
   },
   "players": {
     "title": "Jugadores",

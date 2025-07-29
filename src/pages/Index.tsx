@@ -10,6 +10,7 @@ import LanguageSwitcher from '../components/LanguageSwitcher';
 const Index = () => {
   const { t } = useTranslation();
   const [buyIn, setBuyIn] = useState<number>(10);
+  const [chipsPerBuyIn, setChipsPerBuyIn] = useState<number>(400);
   const [players, setPlayers] = useState<Player[]>([
     { id: 1, name: 'Player 1', entries: 1, finalChips: 0 },
     { id: 2, name: 'Player 2', entries: 1, finalChips: 0 },
@@ -25,6 +26,7 @@ const Index = () => {
       try {
         const parsed = JSON.parse(savedData);
         setBuyIn(parsed.buyIn || 10);
+        setChipsPerBuyIn(parsed.chipsPerBuyIn || 400);
         setPlayers(parsed.players || []);
         setNextId(parsed.nextId || 5);
       } catch (error) {
@@ -36,11 +38,12 @@ const Index = () => {
   useEffect(() => {
     const dataToSave = {
       buyIn,
+      chipsPerBuyIn,
       players,
       nextId,
     };
     localStorage.setItem('pokerCalculator', JSON.stringify(dataToSave));
-  }, [buyIn, players, nextId]);
+  }, [buyIn, chipsPerBuyIn, players, nextId]);
 
   const addPlayer = () => {
     const newPlayer: Player = {
@@ -68,6 +71,7 @@ const Index = () => {
         { id: 4, name: 'Player 4', entries: 1, finalChips: 0 },
       ]);
       setBuyIn(10);
+      setChipsPerBuyIn(400);
       setNextId(5);
     }
   };
@@ -93,7 +97,7 @@ const Index = () => {
         </div>
 
         {/* Buy-in Section */}
-        <BuyInSection buyIn={buyIn} setBuyIn={setBuyIn} />
+        <BuyInSection buyIn={buyIn} setBuyIn={setBuyIn} chipsPerBuyIn={chipsPerBuyIn} setChipsPerBuyIn={setChipsPerBuyIn} />
 
         {/* Players Section */}
         <div className="bg-[#1a1a1a] border-2 border-[#4B382A] rounded-lg p-6 mb-6 shadow-lg">

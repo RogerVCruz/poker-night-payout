@@ -9,6 +9,8 @@ import { useTranslation } from 'react-i18next';
 interface BuyInSectionProps {
   buyIn: number;
   setBuyIn: (value: number) => void;
+  chipsPerBuyIn: number;
+  setChipsPerBuyIn: (value: number) => void;
 }
 
 /**
@@ -27,7 +29,7 @@ const toNumber = (value: number | string, defaultValue = 0): number => {
 /**
  * BuyInSection component for managing buy-in amount
  */
-const BuyInSection: React.FC<BuyInSectionProps> = ({ buyIn, setBuyIn }) => {
+const BuyInSection: React.FC<BuyInSectionProps> = ({ buyIn, setBuyIn, chipsPerBuyIn, setChipsPerBuyIn }) => {
   const { t } = useTranslation();
   return (
     <div className="bg-[#1a1a1a] border-2 border-[#4B382A] rounded-lg p-6 mb-6 shadow-lg">
@@ -74,6 +76,48 @@ const BuyInSection: React.FC<BuyInSectionProps> = ({ buyIn, setBuyIn }) => {
             <span>+5</span>
             <Coins size={14} className="text-[#FFD700]" />
           </button>
+        </div>
+        
+        {/* Chips per Buy-in */}
+        <div className="mt-6">
+          <label className="block text-sm font-medium text-[#F5F5DC] mb-2 flex items-center gap-2">
+            <Coins className="text-[#B22222]" size={18} />
+{t('gameSettings.chipsPerBuyIn')}
+          </label>
+          <div className="relative">
+            <div className="absolute left-4 top-1/2 transform -translate-y-1/2 flex items-center">
+              <Coins className="text-[#B22222] opacity-70" size={18} />
+            </div>
+            <input
+              type="number"
+              min="0"
+              step="100"
+              value={chipsPerBuyIn}
+              onChange={(e) => {
+                const value = e.target.value === '' ? '' : parseInt(e.target.value);
+                setChipsPerBuyIn(toNumber(value));
+              }}
+              onFocus={(e) => e.target.select()}
+              className="w-full px-4 py-3 pl-10 text-lg border-2 border-[#4B382A] rounded-md focus:ring-2 focus:ring-[#FFD700] focus:border-transparent bg-[#1A472A]/30 text-[#F5F5DC]"
+              required
+            />
+          </div>
+          <div className="mt-3 flex justify-between">
+            <button 
+              onClick={() => setChipsPerBuyIn(Math.max(0, chipsPerBuyIn - 100))} 
+              className="px-3 py-1 bg-[#4F4F4F]/30 hover:bg-[#4F4F4F]/50 rounded-md text-[#F5F5DC] transition-colors flex items-center gap-1"
+            >
+              <span>-100</span>
+              <Coins size={14} className="text-[#B22222]" />
+            </button>
+            <button 
+              onClick={() => setChipsPerBuyIn(chipsPerBuyIn + 100)} 
+              className="px-3 py-1 bg-[#B22222]/20 hover:bg-[#B22222]/40 rounded-md text-[#F5F5DC] transition-colors flex items-center gap-1"
+            >
+              <span>+100</span>
+              <Coins size={14} className="text-[#B22222]" />
+            </button>
+          </div>
         </div>
       </div>
     </div>
