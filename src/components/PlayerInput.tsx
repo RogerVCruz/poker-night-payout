@@ -102,7 +102,8 @@ const PlayerInput: React.FC<PlayerInputProps> = ({
       
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
         <div>
-          <label className="block text-sm font-medium text-[#F5F5DC] mb-1">
+          <label className="block text-sm font-medium text-[#F5F5DC] mb-1 flex items-center gap-1">
+            <Coins size={16} className="text-[#B22222]" />
             {t('players.entries')}
           </label>
           <input
@@ -114,9 +115,32 @@ const PlayerInput: React.FC<PlayerInputProps> = ({
               updatePlayer(player.id, 'entries', value);
             }}
             onFocus={(e) => e.target.select()}
-            className="w-full px-3 py-2 border border-[#4B382A] rounded-md focus:ring-2 focus:ring-[#FFD700] focus:border-transparent bg-[#1A472A]/30 text-[#F5F5DC]"
+            className="w-full px-3 py-2 border border-[#4B382A] rounded-md focus:ring-2 focus:ring-[#FFD700] focus:border-transparent bg-[#1A472A]/30 text-[#F5F5DC] mb-2"
             required
           />
+          <div className="flex justify-between">
+            <button 
+              onClick={() => {
+                const currentEntries = toNumber(player.entries);
+                updatePlayer(player.id, 'entries', Math.max(0, currentEntries - 1));
+              }} 
+              className="px-3 py-1 bg-[#4F4F4F]/30 hover:bg-[#4F4F4F]/50 rounded-md text-[#F5F5DC] transition-colors flex items-center gap-1"
+              disabled={toNumber(player.entries) <= 0}
+            >
+              <span>-1</span>
+              <Coins size={14} className="text-[#B22222]" />
+            </button>
+            <button 
+              onClick={() => {
+                const currentEntries = toNumber(player.entries);
+                updatePlayer(player.id, 'entries', currentEntries + 1);
+              }} 
+              className="px-3 py-1 bg-[#B22222]/20 hover:bg-[#B22222]/40 rounded-md text-[#F5F5DC] transition-colors flex items-center gap-1"
+            >
+              <span>+1</span>
+              <Coins size={14} className="text-[#B22222]" />
+            </button>
+          </div>
         </div>
         
         <div>
