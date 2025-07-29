@@ -9,7 +9,7 @@ import LanguageSwitcher from '../components/LanguageSwitcher';
 
 const Index = () => {
   const { t } = useTranslation();
-  const [buyIn, setBuyIn] = useState<number>(100);
+  const [buyIn, setBuyIn] = useState<number>(10);
   const [players, setPlayers] = useState<Player[]>([
     { id: 1, name: 'Player 1', entries: 1, finalChips: 0 },
     { id: 2, name: 'Player 2', entries: 1, finalChips: 0 },
@@ -24,7 +24,7 @@ const Index = () => {
     if (savedData) {
       try {
         const parsed = JSON.parse(savedData);
-        setBuyIn(parsed.buyIn || 100);
+        setBuyIn(parsed.buyIn || 10);
         setPlayers(parsed.players || []);
         setNextId(parsed.nextId || 5);
       } catch (error) {
@@ -67,7 +67,7 @@ const Index = () => {
         { id: 3, name: 'Player 3', entries: 1, finalChips: 0 },
         { id: 4, name: 'Player 4', entries: 1, finalChips: 0 },
       ]);
-      setBuyIn(100);
+      setBuyIn(10);
       setNextId(5);
     }
   };
