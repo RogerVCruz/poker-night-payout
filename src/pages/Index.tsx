@@ -9,8 +9,16 @@ import LanguageSwitcher from '../components/LanguageSwitcher';
 
 const Index = () => {
   const { t } = useTranslation();
-  const [buyIn, setBuyIn] = useState<number>(10);
-  const [chipsPerBuyIn, setChipsPerBuyIn] = useState<number>(400);
+  
+  // Helper function to convert to number for calculations
+  const toNumber = (value: number | string, defaultValue = 0): number => {
+    if (typeof value === 'string') {
+      return value === '' ? defaultValue : parseFloat(value);
+    }
+    return value;
+  };
+  const [buyIn, setBuyIn] = useState<number | string>(10);
+  const [chipsPerBuyIn, setChipsPerBuyIn] = useState<number | string>(400);
   const [players, setPlayers] = useState<Player[]>([
     { id: 1, name: 'Player 1', entries: 1, finalChips: 0 },
     { id: 2, name: 'Player 2', entries: 1, finalChips: 0 },
@@ -37,8 +45,8 @@ const Index = () => {
 
   useEffect(() => {
     const dataToSave = {
-      buyIn,
-      chipsPerBuyIn,
+      buyIn: toNumber(buyIn),
+      chipsPerBuyIn: toNumber(chipsPerBuyIn),
       players,
       nextId,
     };
@@ -130,7 +138,7 @@ const Index = () => {
               <PlayerInput 
                 key={player.id} 
                 player={player} 
-                buyIn={buyIn}
+                buyIn={toNumber(buyIn)}
                 updatePlayer={updatePlayer}
                 removePlayer={removePlayer}
                 playersLength={players.length}
@@ -140,7 +148,7 @@ const Index = () => {
         </div>
 
         {/* Summary Section */}
-        <GameSummary players={players} buyIn={buyIn} />
+        <GameSummary players={players} buyIn={toNumber(buyIn)} />
 
         {/* Export Section */}
         {/* <div className="text-center mt-6">

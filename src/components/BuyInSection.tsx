@@ -7,10 +7,10 @@ import { useTranslation } from 'react-i18next';
  * Props for the BuyInSection component
  */
 interface BuyInSectionProps {
-  buyIn: number;
-  setBuyIn: (value: number) => void;
-  chipsPerBuyIn: number;
-  setChipsPerBuyIn: (value: number) => void;
+  buyIn: number | string;
+  setBuyIn: (value: number | string) => void;
+  chipsPerBuyIn: number | string;
+  setChipsPerBuyIn: (value: number | string) => void;
 }
 
 /**
@@ -53,8 +53,7 @@ const BuyInSection: React.FC<BuyInSectionProps> = ({ buyIn, setBuyIn, chipsPerBu
             step="0.01"
             value={buyIn}
             onChange={(e) => {
-              const value = e.target.value === '' ? '' : parseFloat(e.target.value);
-              setBuyIn(toNumber(value));
+              setBuyIn(e.target.value);
             }}
             onFocus={(e) => e.target.select()}
             className="w-full px-4 py-3 pl-10 text-lg border-2 border-[#4B382A] rounded-md focus:ring-2 focus:ring-[#FFD700] focus:border-transparent bg-[#1A472A]/30 text-[#F5F5DC]"
@@ -63,14 +62,14 @@ const BuyInSection: React.FC<BuyInSectionProps> = ({ buyIn, setBuyIn, chipsPerBu
         </div>
         <div className="mt-3 flex justify-between">
           <button 
-            onClick={() => setBuyIn(Math.max(0, buyIn - 5))} 
+            onClick={() => setBuyIn(Math.max(0, toNumber(buyIn) - 5))} 
             className="px-3 py-1 bg-[#4F4F4F]/30 hover:bg-[#4F4F4F]/50 rounded-md text-[#F5F5DC] transition-colors flex items-center gap-1"
           >
             <span>-5</span>
             <Coins size={14} className="text-[#FFD700]" />
           </button>
           <button 
-            onClick={() => setBuyIn(buyIn + 5)} 
+            onClick={() => setBuyIn(toNumber(buyIn) + 5)} 
             className="px-3 py-1 bg-[#B22222]/20 hover:bg-[#B22222]/40 rounded-md text-[#F5F5DC] transition-colors flex items-center gap-1"
           >
             <span>+5</span>
@@ -94,8 +93,7 @@ const BuyInSection: React.FC<BuyInSectionProps> = ({ buyIn, setBuyIn, chipsPerBu
               step="100"
               value={chipsPerBuyIn}
               onChange={(e) => {
-                const value = e.target.value === '' ? '' : parseInt(e.target.value);
-                setChipsPerBuyIn(toNumber(value));
+                setChipsPerBuyIn(e.target.value);
               }}
               onFocus={(e) => e.target.select()}
               className="w-full px-4 py-3 pl-10 text-lg border-2 border-[#4B382A] rounded-md focus:ring-2 focus:ring-[#FFD700] focus:border-transparent bg-[#1A472A]/30 text-[#F5F5DC]"
@@ -104,14 +102,14 @@ const BuyInSection: React.FC<BuyInSectionProps> = ({ buyIn, setBuyIn, chipsPerBu
           </div>
           <div className="mt-3 flex justify-between">
             <button 
-              onClick={() => setChipsPerBuyIn(Math.max(0, chipsPerBuyIn - 100))} 
+              onClick={() => setChipsPerBuyIn(Math.max(0, toNumber(chipsPerBuyIn) - 100))} 
               className="px-3 py-1 bg-[#4F4F4F]/30 hover:bg-[#4F4F4F]/50 rounded-md text-[#F5F5DC] transition-colors flex items-center gap-1"
             >
               <span>-100</span>
               <Coins size={14} className="text-[#B22222]" />
             </button>
             <button 
-              onClick={() => setChipsPerBuyIn(chipsPerBuyIn + 100)} 
+              onClick={() => setChipsPerBuyIn(toNumber(chipsPerBuyIn) + 100)} 
               className="px-3 py-1 bg-[#B22222]/20 hover:bg-[#B22222]/40 rounded-md text-[#F5F5DC] transition-colors flex items-center gap-1"
             >
               <span>+100</span>
