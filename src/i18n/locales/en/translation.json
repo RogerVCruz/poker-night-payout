@@ -40,6 +40,20 @@
     "exportError": "Error! Try again",
     "exportSuccess": "Image downloaded successfully!"
   },
+  "share": {
+    "shareWhatsApp": "WhatsApp",
+    "openWhatsApp": "WhatsApp",
+    "download": "Download",
+    "sharing": "Sharing...",
+    "opening": "Opening...",
+    "downloading": "Downloading...",
+    "tryAgain": "Try again",
+    "processing": "Processing...",
+    "webShareTooltip": "Share directly to WhatsApp",
+    "whatsappWebTooltip": "Download image and open WhatsApp Web",
+    "downloadTooltip": "Download image to share",
+    "shareTooltip": "Share result"
+  },
   "export": {
     "title": "Export Results",
     "print": "Print Results",

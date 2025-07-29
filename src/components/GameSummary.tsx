@@ -1,11 +1,10 @@
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { Calculator, Users, DollarSign, Coins, AlertTriangle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Player } from './PlayerInput';
-import { useImageExport } from '../hooks/useImageExport';
 import { useToast } from '../hooks/useToast';
-import ExportButton from './ExportButton';
+import WhatsAppShareButton from './WhatsAppShareButton';
 import Toast from './Toast';
 
 /**
@@ -36,7 +35,6 @@ const toNumber = (value: number | string, defaultValue = 0): number => {
 const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn, chipsPerBuyIn }) => {
   const { t } = useTranslation();
   const summaryRef = useRef<HTMLDivElement>(null);
-  const { exportElement, isExporting, error, clearError } = useImageExport();
   const { toast, showToast, hideToast } = useToast();
   
   /**
@@ -105,32 +103,6 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn, chipsPerBuyIn
     return entries * buyIn;
   };
 
-  // Handle export success/error feedback
-  useEffect(() => {
-    if (error) {
-      showToast(error, 'error');
-    }
-  }, [error, showToast]);
-
-  /**
-   * Handles the image export process
-   */
-  const handleExport = async () => {
-    if (!summaryRef.current) {
-      showToast('Erro: Resumo não encontrado', 'error');
-      return;
-    }
-
-    clearError();
-    
-    try {
-      await exportElement(summaryRef.current);
-      showToast(t('gameSummary.exportSuccess'), 'success');
-    } catch (err) {
-      // Error is handled by the hook
-      console.error('Export failed:', err);
-    }
-  };
   
   /**
    * Calculates a player's result based on chip value
@@ -155,14 +127,15 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn, chipsPerBuyIn
     <div ref={summaryRef} className="bg-[#1a1a1a] border-2 border-[#4B382A] rounded-lg p-6 shadow-lg print:break-inside-avoid">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold text-[#F5F5DC] flex items-center gap-3">
-          <Calculator className="text-[#B22222]" size={24} />
+          <Calculator className="text-[#B22222]" size={30} />
           {t('gameSummary.title')}
         </h2>
-        <ExportButton
-          onClick={handleExport}
-          isLoading={isExporting}
-          error={error}
-          onClearError={clearError}
+        <WhatsAppShareButton
+          elementRef={summaryRef}
+          message="🎲 Confira o resultado da nossa partida de poker!"
+          onSuccess={() => showToast(t('gameSummary.exportSuccess'), 'success')}
+          onError={(error) => showToast(error, 'error')}
+          size="md"
         />
       </div>
       
