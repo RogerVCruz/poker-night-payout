@@ -33,7 +33,9 @@
     "winners": "Ganhadores",
     "losers": "Perdedores",
     "breakEven": "Empatados",
-    "playerResults": "Resultados dos Jogadores"
+    "playerResults": "Resultados dos Jogadores",
+    "shareButton": "Compartilhar",
+    "shareTitle": "Compartilhar Resultado"
   },
   "export": {
     "title": "Exportar Resultados",

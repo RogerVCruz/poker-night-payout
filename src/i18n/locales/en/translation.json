@@ -33,7 +33,9 @@
     "winners": "Winners",
     "losers": "Losers",
     "breakEven": "Break Even",
-    "playerResults": "Player Results"
+    "playerResults": "Player Results",
+    "shareButton": "Share",
+    "shareTitle": "Share Result"
   },
   "export": {
     "title": "Export Results",

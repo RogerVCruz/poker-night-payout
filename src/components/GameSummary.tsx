@@ -1,6 +1,7 @@
 
-import React from 'react';
-import { Calculator, Users, DollarSign, Coins, AlertTriangle } from 'lucide-react';
+import React, { useRef } from 'react';
+import { Calculator, Users, DollarSign, Coins, AlertTriangle, Share2, Download } from 'lucide-react';
+import html2canvas from 'html2canvas';
 import { useTranslation } from 'react-i18next';
 import { Player } from './PlayerInput';
 
@@ -31,6 +32,7 @@ const toNumber = (value: number | string, defaultValue = 0): number => {
  */
 const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn, chipsPerBuyIn }) => {
   const { t } = useTranslation();
+  const summaryRef = useRef<HTMLDivElement>(null);
   
   /**
    * Formats a number as currency
@@ -97,6 +99,40 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn, chipsPerBuyIn
     const entries = toNumber(player.entries);
     return entries * buyIn;
   };
+
+  /**
+   * Exports the game summary as an image
+   */
+  const exportAsImage = async () => {
+    if (!summaryRef.current) return;
+
+    try {
+      const canvas = await html2canvas(summaryRef.current, {
+        backgroundColor: '#1a1a1a',
+        scale: 2, // Higher resolution
+        useCORS: true,
+        allowTaint: true,
+        width: summaryRef.current.scrollWidth,
+        height: summaryRef.current.scrollHeight,
+      });
+
+      // Convert to blob and download
+      canvas.toBlob((blob) => {
+        if (blob) {
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement('a');
+          link.href = url;
+          link.download = `poker-resultado-${new Date().toISOString().split('T')[0]}.png`;
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          URL.revokeObjectURL(url);
+        }
+      }, 'image/png');
+    } catch (error) {
+      console.error('Error exporting image:', error);
+    }
+  };
   
   /**
    * Calculates a player's result based on chip value
@@ -118,11 +154,21 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn, chipsPerBuyIn
   };
 
   return (
-    <div className="bg-[#1a1a1a] border-2 border-[#4B382A] rounded-lg p-6 shadow-lg print:break-inside-avoid">
-      <h2 className="text-2xl font-bold text-[#F5F5DC] mb-4 flex items-center gap-3">
-        <Calculator className="text-[#B22222]" size={24} />
-        {t('gameSummary.title')}
-      </h2>
+    <div ref={summaryRef} className="bg-[#1a1a1a] border-2 border-[#4B382A] rounded-lg p-6 shadow-lg print:break-inside-avoid">
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-2xl font-bold text-[#F5F5DC] flex items-center gap-3">
+          <Calculator className="text-[#B22222]" size={24} />
+          {t('gameSummary.title')}
+        </h2>
+        <button
+          onClick={exportAsImage}
+          className="bg-[#B22222] hover:bg-[#D46A6A] text-[#F5F5DC] font-semibold py-2 px-4 rounded-lg flex items-center gap-2 transition-colors shadow-md"
+          title={t('gameSummary.shareTitle')}
+        >
+          <Share2 size={18} />
+          <span className="hidden sm:inline">{t('gameSummary.shareButton')}</span>
+        </button>
+      </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-[#1A472A]/40 p-4 rounded-lg text-center">
