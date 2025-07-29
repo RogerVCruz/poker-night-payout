@@ -35,7 +35,10 @@
     "breakEven": "Break Even",
     "playerResults": "Player Results",
     "shareButton": "Share",
-    "shareTitle": "Share Result"
+    "shareTitle": "Share Result",
+    "exporting": "Generating...",
+    "exportError": "Error! Try again",
+    "exportSuccess": "Image downloaded successfully!"
   },
   "export": {
     "title": "Export Results",

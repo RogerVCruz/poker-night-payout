@@ -35,7 +35,10 @@
     "breakEven": "Sin Cambios",
     "playerResults": "Resultados de Jugadores",
     "shareButton": "Compartir",
-    "shareTitle": "Compartir Resultado"
+    "shareTitle": "Compartir Resultado",
+    "exporting": "Generando...",
+    "exportError": "¡Error! Intenta de nuevo",
+    "exportSuccess": "¡Imagen descargada con éxito!"
   },
   "export": {
     "title": "Exportar Resultados",

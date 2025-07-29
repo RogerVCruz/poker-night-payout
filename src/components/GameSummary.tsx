@@ -1,9 +1,12 @@
 
-import React, { useRef } from 'react';
-import { Calculator, Users, DollarSign, Coins, AlertTriangle, Share2, Download } from 'lucide-react';
-import html2canvas from 'html2canvas';
+import React, { useRef, useEffect } from 'react';
+import { Calculator, Users, DollarSign, Coins, AlertTriangle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Player } from './PlayerInput';
+import { useImageExport } from '../hooks/useImageExport';
+import { useToast } from '../hooks/useToast';
+import ExportButton from './ExportButton';
+import Toast from './Toast';
 
 /**
  * Props for the GameSummary component
@@ -33,6 +36,8 @@ const toNumber = (value: number | string, defaultValue = 0): number => {
 const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn, chipsPerBuyIn }) => {
   const { t } = useTranslation();
   const summaryRef = useRef<HTMLDivElement>(null);
+  const { exportElement, isExporting, error, clearError } = useImageExport();
+  const { toast, showToast, hideToast } = useToast();
   
   /**
    * Formats a number as currency
@@ -100,37 +105,30 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn, chipsPerBuyIn
     return entries * buyIn;
   };
 
+  // Handle export success/error feedback
+  useEffect(() => {
+    if (error) {
+      showToast(error, 'error');
+    }
+  }, [error, showToast]);
+
   /**
-   * Exports the game summary as an image
+   * Handles the image export process
    */
-  const exportAsImage = async () => {
-    if (!summaryRef.current) return;
+  const handleExport = async () => {
+    if (!summaryRef.current) {
+      showToast('Erro: Resumo não encontrado', 'error');
+      return;
+    }
 
+    clearError();
+    
     try {
-      const canvas = await html2canvas(summaryRef.current, {
-        backgroundColor: '#1a1a1a',
-        scale: 2, // Higher resolution
-        useCORS: true,
-        allowTaint: true,
-        width: summaryRef.current.scrollWidth,
-        height: summaryRef.current.scrollHeight,
-      });
-
-      // Convert to blob and download
-      canvas.toBlob((blob) => {
-        if (blob) {
-          const url = URL.createObjectURL(blob);
-          const link = document.createElement('a');
-          link.href = url;
-          link.download = `poker-resultado-${new Date().toISOString().split('T')[0]}.png`;
-          document.body.appendChild(link);
-          link.click();
-          document.body.removeChild(link);
-          URL.revokeObjectURL(url);
-        }
-      }, 'image/png');
-    } catch (error) {
-      console.error('Error exporting image:', error);
+      await exportElement(summaryRef.current);
+      showToast(t('gameSummary.exportSuccess'), 'success');
+    } catch (err) {
+      // Error is handled by the hook
+      console.error('Export failed:', err);
     }
   };
   
@@ -160,14 +158,12 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn, chipsPerBuyIn
           <Calculator className="text-[#B22222]" size={24} />
           {t('gameSummary.title')}
         </h2>
-        <button
-          onClick={exportAsImage}
-          className="bg-[#B22222] hover:bg-[#D46A6A] text-[#F5F5DC] font-semibold py-2 px-4 rounded-lg flex items-center gap-2 transition-colors shadow-md"
-          title={t('gameSummary.shareTitle')}
-        >
-          <Share2 size={18} />
-          <span className="hidden sm:inline">{t('gameSummary.shareButton')}</span>
-        </button>
+        <ExportButton
+          onClick={handleExport}
+          isLoading={isExporting}
+          error={error}
+          onClearError={clearError}
+        />
       </div>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -260,6 +256,16 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn, chipsPerBuyIn
           })}
         </div>
       </div>
+
+      {/* Toast notifications */}
+      {toast && (
+        <Toast
+          message={toast.message}
+          type={toast.type}
+          isVisible={toast.isVisible}
+          onClose={hideToast}
+        />
+      )}
     </div>
   );
 };

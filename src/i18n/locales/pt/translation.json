@@ -35,7 +35,10 @@
     "breakEven": "Empatados",
     "playerResults": "Resultados dos Jogadores",
     "shareButton": "Compartilhar",
-    "shareTitle": "Compartilhar Resultado"
+    "shareTitle": "Compartilhar Resultado",
+    "exporting": "Gerando...",
+    "exportError": "Erro! Tente novamente",
+    "exportSuccess": "Imagem baixada com sucesso!"
   },
   "export": {
     "title": "Exportar Resultados",
