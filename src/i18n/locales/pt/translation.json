@@ -19,7 +19,9 @@
     "investment": "Investimento",
     "result": "Resultado",
     "profit": "Lucro",
-    "loss": "Perda"
+    "loss": "Perda",
+    "entry": "entrada",
+    "entriesPlural": "entradas"
   },
   "gameSummary": {
     "title": "Resumo do Jogo",

@@ -19,7 +19,9 @@
     "investment": "Investment",
     "result": "Result",
     "profit": "Profit",
-    "loss": "Loss"
+    "loss": "Loss",
+    "entry": "entry",
+    "entriesPlural": "entries"
   },
   "gameSummary": {
     "title": "Game Summary",

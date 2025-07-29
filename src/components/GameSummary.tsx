@@ -89,6 +89,14 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn, chipsPerBuyIn
   const hasChipsDiscrepancy = (): boolean => {
     return getChipsDifference() !== 0;
   };
+
+  /**
+   * Calculates a player's investment (entries × buy-in)
+   */
+  const calculatePlayerInvestment = (player: Player): number => {
+    const entries = toNumber(player.entries);
+    return entries * buyIn;
+  };
   
   /**
    * Calculates a player's result based on chip value
@@ -175,20 +183,32 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn, chipsPerBuyIn
         <div className="space-y-2">
           {players.map((player) => {
             const result = calculateResult(player);
+            const investment = calculatePlayerInvestment(player);
             const isProfit = result > 0;
             const isLoss = result < 0;
             
             return (
-              <div key={player.id} className="flex justify-between items-center py-2 px-3 bg-[#1A472A]/30 rounded border-l-4 border-l-[#B22222]">
-                <span className="font-medium text-[#F5F5DC]">{player.name}</span>
-                <span
-                  className={`font-bold flex items-center gap-1 ${
-                    isProfit ? 'text-[#FFD700]' : isLoss ? 'text-[#D46A6A]' : 'text-[#F5F5DC]'
-                  }`}
-                >
-                  {isProfit && <DollarSign size={16} />}
-                  {formatCurrency(result)}
-                </span>
+              <div key={player.id} className="py-3 px-4 bg-[#1A472A]/30 rounded border-l-4 border-l-[#B22222]">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="font-medium text-[#F5F5DC] text-lg">{player.name}</span>
+                  <span
+                    className={`font-bold flex items-center gap-1 text-lg ${
+                      isProfit ? 'text-[#FFD700]' : isLoss ? 'text-[#D46A6A]' : 'text-[#F5F5DC]'
+                    }`}
+                  >
+                    {isProfit && <DollarSign size={16} />}
+                    {formatCurrency(result)}
+                  </span>
+                </div>
+                <div className="flex justify-between items-center text-sm">
+                  <span className="text-[#a0a0a0] flex items-center gap-1">
+                    <DollarSign size={14} className="text-[#B22222]" />
+                    {t('players.investment')}: {formatCurrency(investment)}
+                  </span>
+                  <span className="text-[#a0a0a0]">
+                    {toNumber(player.entries)} {toNumber(player.entries) === 1 ? t('players.entry') : t('players.entriesPlural')}
+                  </span>
+                </div>
               </div>
             );
           })}
