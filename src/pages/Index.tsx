@@ -148,7 +148,7 @@ const Index = () => {
         </div>
 
         {/* Summary Section */}
-        <GameSummary players={players} buyIn={toNumber(buyIn)} />
+        <GameSummary players={players} buyIn={toNumber(buyIn)} chipsPerBuyIn={toNumber(chipsPerBuyIn)} />
 
         {/* Export Section */}
         {/* <div className="text-center mt-6">

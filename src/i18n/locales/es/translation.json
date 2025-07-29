@@ -26,6 +26,8 @@
     "totalPlayers": "Total de Jugadores",
     "totalPot": "Bote Total",
     "totalChips": "Total de Fichas",
+    "expectedChips": "Fichas Esperadas",
+    "chipsUnit": "fichas",
     "winners": "Ganadores",
     "losers": "Perdedores",
     "breakEven": "Sin Cambios",

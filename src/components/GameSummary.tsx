@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Calculator, Users, DollarSign, Coins } from 'lucide-react';
+import { Calculator, Users, DollarSign, Coins, AlertTriangle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Player } from './PlayerInput';
 
@@ -10,6 +10,7 @@ import { Player } from './PlayerInput';
 interface GameSummaryProps {
   players: Player[];
   buyIn: number;
+  chipsPerBuyIn: number;
 }
 
 /**
@@ -28,7 +29,7 @@ const toNumber = (value: number | string, defaultValue = 0): number => {
 /**
  * GameSummary component for displaying game statistics
  */
-const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn }) => {
+const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn, chipsPerBuyIn }) => {
   const { t } = useTranslation();
   
   /**
@@ -57,6 +58,37 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn }) => {
       return sum + finalChips;
     }, 0);
   };
+
+  /**
+   * Calculates the total number of buy-ins across all players
+   */
+  const getTotalBuyIns = (): number => {
+    return players.reduce((sum, player) => {
+      const entries = toNumber(player.entries);
+      return sum + entries;
+    }, 0);
+  };
+
+  /**
+   * Calculates expected chips on table (chips per buy-in × total buy-ins)
+   */
+  const getExpectedChips = (): number => {
+    return chipsPerBuyIn * getTotalBuyIns();
+  };
+
+  /**
+   * Calculates the difference between actual and expected chips
+   */
+  const getChipsDifference = (): number => {
+    return getTotalChips() - getExpectedChips();
+  };
+
+  /**
+   * Checks if there's a discrepancy between actual and expected chips
+   */
+  const hasChipsDiscrepancy = (): boolean => {
+    return getChipsDifference() !== 0;
+  };
   
   /**
    * Calculates a player's result based on chip value
@@ -84,7 +116,7 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn }) => {
         {t('gameSummary.title')}
       </h2>
       
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-[#1A472A]/40 p-4 rounded-lg text-center">
           <div className="flex justify-center mb-1">
             <Users className="text-[#FFD700]" size={28} />
@@ -101,12 +133,40 @@ const GameSummary: React.FC<GameSummaryProps> = ({ players, buyIn }) => {
           <div className="text-sm text-[#a0a0a0]">{t('gameSummary.totalPot')}</div>
         </div>
         
-        <div className="bg-[#4F4F4F]/30 p-4 rounded-lg text-center">
-          <div className="flex justify-center mb-1">
-            <Coins className="text-[#FFD700]" size={28} />
+        <div className={`p-4 rounded-lg text-center ${
+          hasChipsDiscrepancy() 
+            ? 'bg-[#B22222]/20 border-2 border-[#B22222]/50' 
+            : 'bg-[#4F4F4F]/30'
+        }`}>
+          <div className="flex justify-center mb-1 gap-1">
+            {!hasChipsDiscrepancy() && <Coins className={"text-[#FFD700]"} size={28} />}
+            {hasChipsDiscrepancy() && <AlertTriangle className="text-[#D46A6A]" size={38} />}
           </div>
-          <div className="text-2xl font-bold text-[#F5F5DC]">{getTotalChips()}</div>
+          <div className={`text-2xl font-bold ${hasChipsDiscrepancy() ? "text-[#D46A6A]" : "text-[#F5F5DC]"}`}>
+            {getTotalChips()}
+          </div>
           <div className="text-sm text-[#a0a0a0]">{t('gameSummary.totalChips')}</div>
+          {hasChipsDiscrepancy() && (
+            <div className={`text-xs mt-1 font-semibold ${
+              getChipsDifference() > 0 ? 'text-[#FFD700]' : 'text-[#D46A6A]'
+            }`}>
+              {getChipsDifference() > 0 ? '+' : ''}{getChipsDifference()} {t('gameSummary.chipsUnit')}
+            </div>
+          )}
+        </div>
+        
+        <div className={`p-4 rounded-lg text-center ${
+          hasChipsDiscrepancy() 
+            ? 'bg-[#4F4F4F]/50 border-2 border-[#4F4F4F]/70' 
+            : 'bg-[#B22222]/10'
+        }`}>
+          <div className="flex justify-center mb-1">
+            <Coins className={hasChipsDiscrepancy() ? "text-[#a0a0a0]" : "text-[#B22222]"} size={28} />
+          </div>
+          <div className={`text-2xl font-bold ${hasChipsDiscrepancy() ? "text-[#a0a0a0]" : "text-[#F5F5DC]"}`}>
+            {getExpectedChips()}
+          </div>
+          <div className="text-sm text-[#a0a0a0]">{t('gameSummary.expectedChips')}</div>
         </div>
       </div>
 

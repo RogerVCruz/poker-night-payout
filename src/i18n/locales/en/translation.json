@@ -26,6 +26,8 @@
     "totalPlayers": "Total Players",
     "totalPot": "Total Pot",
     "totalChips": "Total Chips",
+    "expectedChips": "Expected Chips",
+    "chipsUnit": "chips",
     "winners": "Winners",
     "losers": "Losers",
     "breakEven": "Break Even",
